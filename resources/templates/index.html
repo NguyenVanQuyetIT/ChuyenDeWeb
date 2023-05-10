@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments/my-fragments.html::link}"/>
+</head>
+<body>
+<div th:replace="~{fragments/my-fragments.html::header(${currentPage})}"/>
+<div th:replace="~{fragments/my-fragments.html::footer}"/>
+<div th:replace="~{fragments/my-fragments.html::script}"/>
+</body>
+</html>

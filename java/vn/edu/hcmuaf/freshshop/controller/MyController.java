@@ -5,15 +5,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import vn.edu.hcmuaf.freshshop.abstraction.IProductService;
+import vn.edu.hcmuaf.freshshop.modelmapping.ProductModel;
 import vn.edu.hcmuaf.freshshop.service.AccountService;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 @Controller
 public class MyController {
-
+@Autowired
+    IProductService productService;
     @GetMapping(value = {"/", "/home", "/index"})
     public String homePage(Model model) {
         model.addAttribute("currentPage", "home");
@@ -48,4 +51,6 @@ public class MyController {
             throw new RuntimeException(e);
         }
     }
+
+
 }

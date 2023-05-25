@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.Set;
 import java.util.UUID;
 @Getter
 @Setter
@@ -35,6 +36,12 @@ public class User {
     private String deliveryAddress;
     @Column(name="status_id")
     private int statusId;
+    @Column(name = "user_type", nullable = true)
+    private int userType;
+    private boolean isEmailVerified;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<UserRole> user_roles;
+
 
 
     public User(String email, String password) {
@@ -43,12 +50,12 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return isEmailVerified;
+    }
 
 
-
-
-
-
+//
 //    public String getEmail() {
 //        return email;
 //    }

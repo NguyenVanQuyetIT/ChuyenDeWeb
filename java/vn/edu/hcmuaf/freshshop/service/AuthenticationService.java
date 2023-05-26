@@ -16,9 +16,11 @@ import vn.edu.hcmuaf.freshshop.abstraction.IEmailService;
 import vn.edu.hcmuaf.freshshop.configure.JwtService;
 import vn.edu.hcmuaf.freshshop.model.*;
 import vn.edu.hcmuaf.freshshop.modelmapping.UserMapping;
+import vn.edu.hcmuaf.freshshop.modelmapping.VerificationMapping;
 import vn.edu.hcmuaf.freshshop.repository.RoleRepository;
 import vn.edu.hcmuaf.freshshop.repository.UserRepository;
 import vn.edu.hcmuaf.freshshop.repository.UserRoleRepository;
+import vn.edu.hcmuaf.freshshop.repository.VerificationTokenRepository;
 import vn.edu.hcmuaf.freshshop.request.RegisterRequest;
 
 import java.io.UnsupportedEncodingException;
@@ -41,6 +43,7 @@ public class AuthenticationService {
     private final VerificationTokenRepository verificationTokenRepository;
     @Autowired
     private final IEmailService sendMailService;
+
     @Autowired
     private final UserRoleRepository userRoleRepository;
 

@@ -30,6 +30,26 @@ public class MyController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register(Model model) {
+        return "register";
+    }
+
+    @GetMapping("/about")
+    public String about(Model model) {
+        return "about";
+    }
+
+    @GetMapping("/shop")
+    public String shop(Model model) {
+        return "shop";
+    }
+
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        return "contact";
+    }
+
     @PostMapping("/login")
     public String login(Model model, HttpServletRequest request) {
         String username = request.getParameter("username");
@@ -38,7 +58,6 @@ public class MyController {
             boolean isLogin = new AccountService().login(username, password);
             if (isLogin) {
                 request.getSession().setAttribute("username", username);
-//                new CartServlet().doPost(request, response);
                 model.addAttribute("currentPage", "home");
                 return "redirect:/";
             } else {

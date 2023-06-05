@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnect {
-    String url = "jdbc:mysql://localhost:3306/web_ban_trai_cay";
+    String url = "jdbc:mysql://localhost:3067/web_ban_trai_cay";
     String user = "root";
     String pass = "";
     Connection connection;

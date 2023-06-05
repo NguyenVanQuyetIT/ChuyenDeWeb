@@ -29,7 +29,7 @@ public class Product {
     private int categoryId;
     @Column(name="description")
     private  String description;
-    @OneToMany(mappedBy = "productId")
+    @OneToMany(mappedBy = "product")
     private List<Image> images;
 
     @Column(name="status")

@@ -24,6 +24,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = {"http://localhost:3000/"})
 @Controller
 public class AuthenticationController {
+    @Autowired
     private final AuthenticationService authenticationService;
     @Autowired
     UserRepository userService;

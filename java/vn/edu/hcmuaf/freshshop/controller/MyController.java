@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import vn.edu.hcmuaf.freshshop.service.AccountService;
+import org.springframework.web.bind.annotation.RequestParam;
+import vn.edu.hcmuaf.freshshop.model.User;
+import vn.edu.hcmuaf.freshshop.service.UserService;
 import vn.edu.hcmuaf.freshshop.service.ProductService;
 
 import java.sql.SQLException;
@@ -15,6 +17,8 @@ import java.sql.SQLException;
 public class MyController {
     @Autowired
     ProductService productService;
+    @Autowired
+    UserService userService;
 
     @GetMapping(value = {"/", "/home", "/index"})
     public String homePage(Model model) {
@@ -34,15 +38,16 @@ public class MyController {
         return "register";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("username");
+        return "redirect:/";
+    }
+
     @GetMapping("/about")
     public String about(Model model) {
         return "about";
     }
-
-//    @GetMapping("/shop")
-//    public String shop(Model model) {
-//        return "shop";
-//    }
 
     @GetMapping("/contact")
     public String contact(Model model) {
@@ -50,25 +55,16 @@ public class MyController {
     }
 
     @PostMapping("/login")
-    public String login(Model model, HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        try {
-            boolean isLogin = new AccountService().login(username, password);
-            if (isLogin) {
+    public String login(Model model, HttpServletRequest request, @RequestParam String username, @RequestParam String password) {
+            User user = userService.login(username, password);
+            if (user != null) {
                 request.getSession().setAttribute("username", username);
                 model.addAttribute("currentPage", "home");
                 return "redirect:/";
             } else {
                 model.addAttribute("username", username);
                 model.addAttribute("errorLogin", true);
-//                request.getRequestDispatcher("login.jsp").forward(request, response);
                 return "redirect:/login";
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
-
-
 }

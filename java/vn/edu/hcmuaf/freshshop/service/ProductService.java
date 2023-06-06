@@ -32,7 +32,4 @@ public class ProductService {
         return productRepository.findImageURLsById(idProduct);
     }
 
-    public int getMaxQuantityOfProduct(int idP){
-        return 0;
-    }
 }

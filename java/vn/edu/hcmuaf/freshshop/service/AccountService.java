@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.freshshop.service;
 
+import org.springframework.stereotype.Service;
 import vn.edu.hcmuaf.freshshop.db.DBConnect;
 
 import java.sql.Connection;
@@ -7,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Service
 public class AccountService {
     Connection conn;
     PreparedStatement statement;

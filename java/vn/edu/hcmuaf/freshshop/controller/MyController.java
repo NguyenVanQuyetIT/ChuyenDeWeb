@@ -1,22 +1,21 @@
 package vn.edu.hcmuaf.freshshop.controller;
 
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import vn.edu.hcmuaf.freshshop.abstraction.IProductService;
-import vn.edu.hcmuaf.freshshop.modelmapping.ProductModel;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import vn.edu.hcmuaf.freshshop.service.AccountService;
+import vn.edu.hcmuaf.freshshop.service.ProductService;
 
 import java.sql.SQLException;
-import java.util.UUID;
 
 @Controller
 public class MyController {
-@Autowired
-    IProductService productService;
+    @Autowired
+    ProductService productService;
+
     @GetMapping(value = {"/", "/home", "/index"})
     public String homePage(Model model) {
         model.addAttribute("currentPage", "home");
@@ -40,10 +39,10 @@ public class MyController {
         return "about";
     }
 
-    @GetMapping("/shop")
-    public String shop(Model model) {
-        return "shop";
-    }
+//    @GetMapping("/shop")
+//    public String shop(Model model) {
+//        return "shop";
+//    }
 
     @GetMapping("/contact")
     public String contact(Model model) {

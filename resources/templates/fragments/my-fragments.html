@@ -59,7 +59,7 @@
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <th:block th:if="${username != null}">
-                                    <span th:utext="Xin chào, ${username}"></span>
+                                    <span th:text="${username}"></span>
                                 </th:block>
                                 <i class="fa fa-user" id="user"></i>
                             </a>
@@ -161,7 +161,6 @@
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-top-box">
                             <h3>Truyền thông xã hội</h3>
-                            <%-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>--%>
                             <ul>
                                 <li><a href="https://facebook.com"><i class="fab fa-facebook"
                                                                       aria-hidden="true"></i></a>
@@ -255,10 +254,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{css/custom.css}">
 
-    <!--[if lt IE 9]>
-    <script th:src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script th:src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js}"></script>
 
 </div>

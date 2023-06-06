@@ -20,7 +20,7 @@ public class Image {
     @Id
     @Column(columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

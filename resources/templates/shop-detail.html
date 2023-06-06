@@ -1,7 +1,25 @@
 <!doctype html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="~{fragments/my-fragments.html::link}"/>
+    <!--    <div th:replace="~{fragments/my-fragments.html::link}"/>-->
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Fresh Shop</title>
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" th:href="@{images/favicon.ico}" type="image/x-icon">
+    <link rel="apple-touch-icon" th:href="@{images/apple-touch-icon.png}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" th:href="@{css/responsive.css}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{css/custom.css}">
 </head>
 <body>
 <div th:replace="~{fragments/my-fragments.html::header(${currentPage})}"/>
@@ -23,15 +41,15 @@
 <!-- End All Title Box -->
 
 <!-- Start Shop Detail -->
-<div class="shop-detail-box-main" th:with="product=${product}">
+<div class="shop-detail-box-main">
     <div class="container">
         <div class="row">
             <div class="col-xl-5 col-lg-5 col-md-6">
                 <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <th:block th:each="url, state:${product.getImages()}">
+                        <th:block th:each="img, state:${product.getImages()}">
                             <div class="carousel-item" th:classappend="${state.index == 0} ? active : ''">
-                                <img class="d-block w-100" src="${url}"
+                                <img class="d-block w-100" th:src="${img.getUrl()}"
                                      alt="Image"></div>
                         </th:block>
                     </div>
@@ -55,22 +73,24 @@
             </div>
             <div class="col-xl-7 col-lg-7 col-md-6">
                 <div class="single-product-details">
-                    <h2>${product.getName()}</h2>
+                    <h2 th:text="${product.getName()}"></h2>
                     <h5 th:with="check=${product.getDiscountedPrice()==0||product.getDiscountedPrice()==product.getPrice()}">
                         <th:block th:if="${check}">
-                            ${product.getPrice()}đ
+                            <div><span th:text="${product.getPrice()}"></span>đ</div>
                             <div th:with="price=${product.getPrice()}"/>
                         </th:block>
                         <th:block th:unless="${check}">
-                            <del>${product.getPrice()}đ</del>
-                            ${product.getDiscountedPrice()}đ
+                            <del th:text="${product.getPrice()} + đ"></del>
+                            <div><span th:text="${product.getDiscountedPrice()}"></span>đ</div>
                             <div th:with="price=${product.getDiscountedPrice()}"/>
                         </th:block>
                     </h5>
-                    <p class="available-stock"><span>${product.getQuantity()} có sẵn / <a href="#">8 đã bán </a></span>
-                    <p>
+                    <p class="available-stock">
+                        <span th:text="${product.quantity} + ' có sẵn'"></span> / <a href="#">8 đã bán</a>
+                    </p>
+
                     <h4>Mô tả:</h4>
-                    <p>${product.getDescription()} </p>
+                    <p th:text="${product.getDescription()}"></p>
                     <ul>
                         <li>
                             <div class="form-group quantity-box">
@@ -88,12 +108,16 @@
                     </th:block>
                     <div class="price-box-bar">
                         <div class="cart-and-bay-btn">
-                            <a class="btn hvr-hover" data-fancybox-close="" href="cart"
-                               th:onclick="addItem(/*[[${product.getId()}]]*/, /*[[${price}]]*/, /*[[${cart.size()}]]*/'', /*[[${indexItem}]]*/, true) ">Mua ngay</a>
+                            <a class="btn hvr-hover" data-fancybox-close="" th:href="@{/cart}"
+                               th:onclick="addItem(/*[[${product.id}]]*/, /*[[${price}]]*/, /*[[${cart.size()}]]*/'', /*[[${indexItem}]]*/, true)">Mua
+                                ngay</a>
+
                             <a class="btn hvr-hover" data-fancybox-close="" style="color: white"
-                               th:onclick="addItem(/*[[${product.getId()}]]*/, /*[[${price}]]*/, /*[[${cart.size()}]]*/'', /*[[${indexItem}]]*/, true);"/>
+                               th:onclick="addItem(/*[[${product.id}]]*/, /*[[${price}]]*/, /*[[${cart.size()}]]*/'', /*[[${indexItem}]]*/, true)"></a>
+
                             <th:block th:if="${username!=null}">alert('Đã thêm sản phẩm')</th:block>
-                            <th:block th:if="${username==null}">window.location.href = 'cart'</th:block>">
+                            <th:block th:if="${username==null}">window.location.href = 'cart'</th:block>
+                            ">
                             Thêm vào giỏ hàng</a>
                         </div>
                     </div>
@@ -345,6 +369,5 @@
 <!-- End Cart -->
 
 <div th:replace="~{fragments/my-fragments.html::footer}"/>
-<div th:replace="~{fragments/my-fragments.html::script}"/>
 </body>
 </html>
